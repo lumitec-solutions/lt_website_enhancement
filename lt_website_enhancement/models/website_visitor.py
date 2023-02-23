@@ -36,6 +36,14 @@ class WebsiteVisitor(models.Model):
                 res[field]['searchable'] = False
         return res
 
+    def calculate_duration(self):
+        visitors = self.env['website.visitor'].search([('set_duration', '=', False)], limit=3000)
+        for rec in visitors:
+            if rec.active and rec.last_connection_datetime:
+                difference = rec.last_connection_datetime - rec.create_date
+                rec.duration = difference.seconds
+                rec.set_duration = True
+                
     @api.depends('last_connection_datetime')
     def compute_duration(self):
         """compute duration based on last_connection_datetime and create_date"""
