@@ -1,4 +1,4 @@
-odoo.define('lt_website_visitor.scroll_page', function (require) {
+odoo.define('lt_website_enhancement.scroll_page', function (require) {
 'use strict';
     var publicWidget = require('web.public.widget');
     publicWidget.registry.Scroll = publicWidget.Widget.extend({
